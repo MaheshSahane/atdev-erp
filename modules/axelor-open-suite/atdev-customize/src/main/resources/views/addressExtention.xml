@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+<form name="address-form" id ="new-add" title="Address" model="com.axelor.apps.base.db.Address" extension="true"
+onSave="action-group-base-address-onsave,save,action-base-address-method-update-lat-long"  onNew="default-address-record" width="large" >
+
+ <extend target="panel[@name='mainPanel']">
+   
+   
+   <attribute name="title" value="Address details New 2"/>
+   
+</extend>
+  <extend target="//field[@name='zip']">    
+
+<attribute name="onChange" value="action-address-method-autocomplete-addressNew,action-toStore-addressL4"/>
+    <attribute name="required" value="true"/>
+</extend>
+   <extend target="//field[@name='city']">    
+
+<attribute name="onChange" value="action-address-change-city-new,action-toStore-addressL4"/>
+    <attribute name="required" value="true"/>
+</extend>
+ 
+    <extend target="//field[@name='addressL4']">    
+
+<attribute name="hidden" value="true"/>
+</extend>
+ 
+  <extend target="//field[@name='zip']">    
+<insert position="after">
+      <field name="department" title="State" onSelect="action-address-attrs-update-domain-Dept"/>
+    </insert>
+</extend>
+
+
+
+</form>
+
+
+<action-record name="action-address-change-city-new" model="com.axelor.apps.base.db.Address">
+  <field if="city &amp;&amp; !city.zip" name="addressL6" expr="eval: city.name"/>
+  <field if="!city" name="addressL6" expr="eval: null"/>
+  <field if="city" name="addressL7Country" expr="eval: city?.country"/>
+  <field name="zip" expr="eval: city?.zip"/>
+  <field name="department" expr="eval: city?.department"/>
+
+  <field name="street" expr="eval: null"/>
+    <field if="city &amp;&amp; city.zip &amp;&amp; department " name="addressL6" expr="eval:city.hasZipOnRight ? city.name+' '+department.name+' '+city.zip :department.name+' '+city.zip+' '+city.name"/>
+	<field if="city &amp;&amp; city.zip" name="addressL6" expr="eval:city.hasZipOnRight ? city.name+' '+city.zip :city.zip+' '+city.name"/>
+
+</action-record>
+ <action-method name="action-address-method-autocomplete-addressNew">
+		<call class="com.atdev.apps.customize.web.AddressControllerExd" method="autocompleteAddressNew" />
+    </action-method>
+
+
+
+
+
+<action-attrs name="action-address-attrs-update-domain-Dept">
+  <attribute if="addressL7Country" name="domain" expr="eval: (addressL7Country ? &quot;self.addressL7Country = :addressL7Country&quot; : &quot;&quot;)" for="department"/>
+  <attribute if="!addressL7Country" name="domain" expr="eval: null" for="department"/>
+</action-attrs>
+<action-record name="action-toStore-addressL4" model="com.axelor.apps.base.db.Product">
+<field name="addressL4"  expr="eval:zip"/>
+</action-record>
+	
+</object-views>

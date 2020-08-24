@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+<grid name="customerGrid" title="Customers" model="com.axelor.apps.base.db.Partner" orderBy="name" edit-icon="true">
+  <menubar>
+    <menu name="partnerReportsMenu" title="Reports" showTitle="true" icon="fa-files-o">
+      <item name="contactPhoneBookItem" title="Contact PhoneBook" action="action-print-phonebook"/>
+      <item if="__config__.app.isApp('employee')" name="companyPhoneBookItem" title="Company phoneBook" action="action-print-company-phonebook"/>
+    </menu>
+    <menu name="partnerToolsMenu" title="Tools" showTitle="true" icon="fa-wrench">
+      <item name="checkDuplicateItem" title="Check Duplicate" action="action-general-check-duplicate-records"/>
+      <item name="mergeDuplicatedItem" title="Merge duplicated" action="action-validate-select-object-message,action-duplicate-object-wizard-open"/>
+    </menu>
+  </menubar>
+  <field name="partnerSeq" width="120"/>
+  <field name="simpleFullName"/>
+  <field name="fixedPhone"/>
+  <field name="emailAddress.address" title="Email" placeholder="whatever@example.com"/>
+  <field name="partnerCategory" form-view="partner-category-form" grid-view="partner-category-grid"/>
+  <field name="fiscalPosition.code" title="Fiscal position"/>
+  <field name="registrationCode"/>
+  <field name="mainAddress"/>
+  <field if="__config__.app.getApp('base').getEnableMultiCompany()" name="companyStr"/>
+   <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="addStripeCustomer" title="Add Stripe Customer" icon="fa-plus" onClick="Add-Customer-Stripe"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="scheduleEventBtn" title="Schedule Event" icon="fa-group" onClick="action-partner-view-schedule-event"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="sendByEmailBtn" title="Send Email" icon="fa-envelope" onClick="action-send-by-email-with-template"/>
+</grid>
+
+
+
+<action-method name="Add-Customer-Stripe">
+  <call method="AddCust" class="com.atdev.apps.common.web.StripeController"/>
+</action-method>
+
+
+</object-views>

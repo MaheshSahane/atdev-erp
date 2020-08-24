@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+
+<custom name="SimpleLegal" title="SimpleLegal Invoice List" >
+ <dataset type="rpc">
+   
+  <![CDATA[
+com.atdev.apps.common.web.SimpleLegalController:getAllInvoice
+  ]]>
+   
+  </dataset>
+<template>
+ <![CDATA[
+  <report-table data='data' columns='vendor_id,total,final_amount'></report-table>
+  ]]>
+  </template>
+</custom>
+
+
+
+
+<custom name="stripe" title="Stripe Customer List" >
+<dataset type="rpc">
+ 
+ <![CDATA[
+com.atdev.apps.common.web.StripeController:getAllCust
+ ]]>
+ 
+ </dataset>
+<template>
+<![CDATA[
+ <report-table data='data' columns='name,email,phone'></report-table>
+ ]]>
+ </template>
+</custom>
+
+
+
+<custom name="SuiteCrm" title="SuiteCrm Contact List" >
+ <dataset type="rpc">
+   
+  <![CDATA[
+com.atdev.apps.common.web.SuiteCRMController:ReadAllContact
+  ]]>
+   
+  </dataset>
+<template>
+ <![CDATA[
+  <report-table data='data' columns='first_name,last_name,description'></report-table>
+  ]]>
+  </template>
+</custom>
+
+
+
+
+<custom name="EasyShip" title="EasyShip Shipments List" >
+ <dataset type="rpc">
+   
+  <![CDATA[
+com.atdev.apps.common.web.EasyShipController:getShipments
+  ]]>
+   
+  </dataset>
+<template>
+ <![CDATA[
+ <report-table data='data' columns='easyship_shipment_id,destination_name,destination_phone_number,box,created_at'></report-table>  ]]>
+  </template>
+</custom>
+
+
+<custom name="SimpleLegalUsers" title="SimpleLegal User List" >
+ <dataset type="rpc">
+   
+  <![CDATA[
+com.atdev.apps.common.web.SimpleLegalController:getUser
+  ]]>
+   
+  </dataset>
+<template>
+ <![CDATA[
+  <report-table data='data' columns='first_name,last_name,email'></report-table>
+  ]]>
+  </template>
+</custom>
+
+
+
+
+
+</object-views>

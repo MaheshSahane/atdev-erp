@@ -1,0 +1,13 @@
+apply plugin: "com.axelor.app-module"  
+apply from: "../version.gradle"  
+apply { 	version = openSuiteVersion }  
+axelor { 	title "ATDEV Common" 	
+description "ATDEV Common" }  
+dependencies { 	
+compile project(":modules:axelor-base")
+compile project(":modules:axelor-account")
+ 	implementation "com.stripe:stripe-java:19.27.0"
+ 
+compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.2.0'
+compile files('libs/sugaronrest-1.0.0.jar')
+}

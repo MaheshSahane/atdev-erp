@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+    <menuitem name="AtdevCommon-root" title="Integration Module" order="-70" icon="fa-pencil-square-o" icon-background="purple" if="__config__.app.isApp('bpm')" />
+  
+
+
+    <menuitem name="Stripe" title="Stripe" parent="AtdevCommon-root"  />
+  	<menuitem name="SuitCRM" title="SuitCRM" parent="AtdevCommon-root"   />
+  	<menuitem name="SimpleLeagal" title="SimpleLeagal" parent="AtdevCommon-root"  />
+  	<menuitem name="EasyShip" title="EasyShip" parent="AtdevCommon-root"   />
+  	
+  
+  
+   <menuitem name="AddCustomer" title="AddCustomer" parent="Stripe" action="action-customerGrid"  />
+  <menuitem name="AllStripeCustomer" title="AllStripeCustomer" parent="Stripe" action="Stripe-All-Customer"  />
+ 
+ 
+    <menuitem name="AddContact" title="Add Contact" parent="SuitCRM" action="Add-Contact_SuiteCRM"  />
+ 	<menuitem name="GetContact" title="View Contact" parent="SuitCRM" action="get-One-SuiteCRM-Contact"  />
+ 	
+  	<menuitem name="GetAllInvoice" title="View All Invoice" parent="SimpleLeagal" action="get-Invoice-SimpleLeagal"  />
+  	<menuitem name="AddUsers" title="Add User" parent="SimpleLeagal" action="Add-User-SimpleLeagal"  />
+  	<menuitem name="getUsers" title="View Users" parent="SimpleLeagal" action="view-User-SimpleLeagal"  />
+  	
+ 
+   	<menuitem name="GetAllShipments" title="View All Shipments" parent="EasyShip" action="get-Shipments-EasyShip"  />
+ 
+ 
+  <action-view name="action-customerGrid" title="Customers" model="com.axelor.apps.base.db.Partner">
+ 
+  <view name="customerGrid" type="grid"/>
+  <view name="partner-customer-form" type="form"/>
+  <view-param name="limit" value="39"/>
+  <view-param name="search-filters" value="partner-filters"/>
+  <domain>self.isContact = false AND (self.isCustomer = true OR self.isProspect = true)</domain>
+  <context name="user_id" expr="eval:__user__"/>
+  <context name="_isCustomer" expr="true"/>
+  <context name="_domain" expr="self.isContact = false AND (self.isCustomer = true OR self.isProspect = true)"/>
+  <context name="json-enhance" expr="eval:true"/>
+<!-- <view type="form" name="contact-form"/> -->
+</action-view>
+  
+<action-view name="Stripe-All-Customer" title="Stripe-All-Customer">
+ <view name="common.dashboard.Stripe" type="dashboard"/>
+</action-view>
+   
+   
+ <action-view name="Add-Contact_SuiteCRM" model="com.axelor.apps.base.db.Partner" title="Contacts">
+  <view name="partner-contact-cards" type="cards"/>
+  <view name="partner-contact-grid-common" type="grid"/>
+  <view name="partner-contact-form" type="form"/>
+  <view-param name="limit" value="39"/>
+  <view-param name="search-filters" value="partner-filters"/>
+  <domain>self.isContact = true AND (self.mainPartner.isCustomer = true OR self.mainPartner.isProspect = true)</domain>
+  <context name="_domain" expr="self.isContact = true AND (self.mainPartner.isCustomer = true OR self.mainPartner.isProspect = true)"/>
+</action-view>
+   
+   
+
+<action-view name="get-One-SuiteCRM-Contact" title="get-One-SuiteCRM-Contact">
+ <view name="common.dashboard.SuiteCRM" type="dashboard"/>
+</action-view>
+
+
+<action-view name="get-Invoice-SimpleLeagal" title="get-Invoice-SimpleLeagal">
+ <view name="common.dashboard.SimpleLeagal" type="dashboard"/>
+</action-view>
+
+
+<action-view name="view-User-SimpleLeagal" title="get-Invoice-SimpleLeagal">
+ <view name="common.dashboard.SimpleLeagalUser" type="dashboard"/>
+</action-view>
+
+<action-view name="Add-User-SimpleLeagal" title="Add-User-SimpleLeagal">
+<view name="SimpleLegal-user-grid-base" type="grid"/>
+  <view name="user-form" type="form"/>
+  <view-param name="search-filters" value="user-filters"/>
+  <context name="_today" expr="eval: __date__"/>
+</action-view>
+
+<action-view name="get-Shipments-EasyShip" title="get-Shipments-EasyShip">
+ <view name="common.dashboard.EasyShip" type="dashboard"/>
+</action-view>
+   
+	
+</object-views>

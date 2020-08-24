@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+
+
+<grid id="citynew" name="city-grid" title="Cities" model="com.axelor.apps.base.db.City" extension="true">
+    <extend target="//field[@name='zip']">
+     <insert position="after">
+        <field name="department" title="State"/>
+     </insert>
+  </extend>
+</grid>
+
+
+<form id="new-Dept" name="city-form" title="city-form" model="com.axelor.apps.base.db.City" extension="true" width="large" onSave="action-group-base-address-onsave,save,action-base-address-method-update-lat-long" onNew="default-address-record">
+  <extend target="//field[@name='department']">    
+   <attribute name="title" value="State"/>
+
+    
+    </extend>
+ 
+</form>
+</object-views>

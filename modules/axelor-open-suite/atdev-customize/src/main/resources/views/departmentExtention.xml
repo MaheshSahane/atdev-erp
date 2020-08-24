@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+
+	<form name="department-form" id="new-department"  title="department-form"
+		model="com.axelor.apps.base.db.Department" extension="true"
+		width="large"
+		onSave="action-group-base-address-onsave,save,action-base-address-method-update-lat-long"
+		onNew="default-address-record">
+
+<extend target="//field[@name='code']">    
+
+    <attribute name="title" value="State code"/>
+</extend>
+<extend target="//field[@name='name']">    
+
+    <attribute name="title" value="State Name"/>
+</extend>
+
+
+		<extend target="//field[@name='region']">
+			<insert position="after">
+				<field name="addressL7Country" title="Country"
+					form-view="country-form" grid-view="country-grid" />
+			</insert>
+		</extend>
+	</form>
+
+
+
+<grid id="deptGridnew" name="department-grid" title="Departments" model="com.axelor.apps.base.db.Department" extension="true">
+    
+     <extend target="//field[@name='name']">    
+
+    <attribute name="title" value="State Name"/>
+</extend>
+
+</grid>
+
+
+</object-views>

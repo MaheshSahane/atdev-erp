@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+xmlns="http://axelor.com/xml/ns/domain-models"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+<module name="core" package="com.axelor.apps.common.db" />
+
+<entity name="Login">
+<string name="user_name" title="User Name"/>
+
+<string name="login_time" title="Login Time" />
+
+<string name="logout_time" title="Logout Time" />
+
+<string name="extra_field_1" title="Extra Field 1"/>
+<string name="extra_field_2" title="Extra Field 2"/>
+<string name="extra_field_3" title="Extra Field 3"/>
+<string name="extra_field_4" title="Extra Field 4"/>
+
+
+</entity>
+
+</domain-models>

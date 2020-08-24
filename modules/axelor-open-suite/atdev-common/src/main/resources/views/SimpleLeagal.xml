@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+<grid id="SimpleLegal-user-grid-base" name="SimpleLegal-user-grid-base" title="Users list" model="com.axelor.auth.db.User" edit-icon="true">
+  <toolbar>
+    <button name="generateRandomPasswordsBtn" title="Generate random passwords" onClick="action-user-method-open-generate-random-passwords-wizard"/>
+  </toolbar>
+  <field name="name"/>
+  <field name="fullName"/>
+  <field name="activeCompany" form-view="company-form" grid-view="company-grid"/>
+  <field name="group" form-view="group-form" grid-view="group-grid"/>
+  <field name="blocked"/>
+  <field name="activateOn"/>
+  <field name="expiresOn"/>
+ <button  name="addUser" title="Add User in SimpleLegal" icon="fa-plus" onClick="Add-User_simpleLegal"/>
+  
+</grid>
+
+
+<action-method name="Add-User_simpleLegal">
+  <call method="addUser" class="com.atdev.apps.common.web.StripeController"/>
+</action-method>
+
+
+</object-views>

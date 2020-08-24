@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+
+
+<grid name="partner-contact-grid-common" title="Contacts" model="com.axelor.apps.base.db.Partner" edit-icon="true">
+  <toolbar>
+    <button name="checkDuplicateBtn" title="Check Duplicate" onClick="action-general-check-duplicate-records"/>
+    <button name="replaceDuplicateBtn" title="Merge duplicated" onClick="action-validate-select-object-message,action-duplicate-object-wizard-open"/>
+  </toolbar>
+  <field name="partnerSeq" width="120"/>
+  <field name="simpleFullName"/>
+  <field name="fixedPhone"/>
+  <field name="mobilePhone"/>
+  <field name="emailAddress.address" title="Email" placeholder="whatever@example.com"/>
+  <field name="mainPartner.simpleFullName" title="Main company"/>
+  <field name="jobTitleFunction"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="addContact" title="Add SuiteCRM Contact" icon="fa-plus" onClick="Add-Contact"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="scheduleEventBtn" title="Schedule Event" icon="fa-group" onClick="action-contact-partner-view-schedule-event"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="sendByEmailBtn" title="Send Email" icon="fa-envelope" onClick="action-send-by-email-with-template"/>
+</grid><grid name="partner-contact-grid-common" title="Contacts" model="com.axelor.apps.base.db.Partner" edit-icon="true">
+  <toolbar>
+    <button name="checkDuplicateBtn" title="Check Duplicate" onClick="action-general-check-duplicate-records"/>
+    <button name="replaceDuplicateBtn" title="Merge duplicated" onClick="action-validate-select-object-message,action-duplicate-object-wizard-open"/>
+  </toolbar>
+  <field name="partnerSeq" width="120"/>
+  <field name="simpleFullName"/>
+  <field name="fixedPhone"/>
+  <field name="mobilePhone"/>
+  <field name="emailAddress.address" title="Email" placeholder="whatever@example.com"/>
+  <field name="mainPartner.simpleFullName" title="Main company"/>
+  <field name="jobTitleFunction"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="addContact" title="Add SuiteCRM Contact" icon="fa-plus" onClick="Add-Contact-SuitCRM"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="scheduleEventBtn" title="Schedule Event" icon="fa-group" onClick="action-contact-partner-view-schedule-event"/>
+  <button if="__config__.app.isApp('crm')" if-module="axelor-crm" name="sendByEmailBtn" title="Send Email" icon="fa-envelope" onClick="action-send-by-email-with-template"/>
+</grid>
+
+
+<action-method name="Add-Contact-SuitCRM">
+<call method="CreateContact" class="com.atdev.apps.common.web.SuiteCRMController"/>
+</action-method>
+
+
+</object-views>
